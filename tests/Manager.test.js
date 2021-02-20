@@ -1,4 +1,4 @@
-const {testResult} = require("@jest/types");
+// const {testResult} = require("@jest/types");
 
 const Manager = require("../lib/Manager");
 const Employee = require("../lib/Employee");
@@ -18,8 +18,10 @@ test("getRole() should return \"Manager\"", () =>{
 });
 
 test("can set office number via getOffice", () =>{
-    const testValue = "100";
+    const testValue = 100;
     const e = new Manager ("Lola", 2, "test@test.com", testValue);
-    expect(e.getOffice()).toBe(testValue);
+    expect(e.getOfficeNumber()).toBe(testValue);
 
 });
+
+// module.exports = Employee; 

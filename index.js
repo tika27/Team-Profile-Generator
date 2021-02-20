@@ -29,7 +29,161 @@ const generatePage = require("./src/template.js")
 const writeHTML = require("./dist/team.html");
 const { get } = require("https");
 
-const team = []
+
+
+
+
+const teamMember = [];
+
+function getInfo() {
+  function getManager() {
+    inquirer.prompt([
+      {
+        type: "input",
+        name: "managerName",
+        message: "What is your Manager's name?"
+      },
+      {
+        type: "input",
+        name: "managerId",
+        message: "What is your Manager's Id?"
+      },
+      {
+        type: "input",
+        name: "managerEmail",
+        message: "What is your Manager's Email?"
+      },
+      {
+        type: "input",
+        name: "officeNumber",
+        message: "What is your Manager's office Number?"
+      }
+
+    ]).then(response => {
+      const manager = new Manager(response.managerName, response.managerId, response.managerEmail, response.officeNumber);
+      teamMember.push(manager);
+      addingNewMember();
+    })
+  }
+  function getEngineer() {
+    inquirer.prompt([
+        {
+          type: "input",
+          name: "engineerName",
+          message: "what is your engineer name? "
+        },
+        
+        {
+          type: "input",
+          name: "engineerId",
+          message: "what is your engineer Id? "
+        },
+        {
+          type: "input",
+          name: "engineerEmail",
+          message: "what is your engineer Email? "
+        },
+        {
+          type: "input",
+          name: "github",
+          message: "what is your engineer Github Username? "
+        },
+
+    ]).then(response => {
+      const engineer = new Engineer(response.engineerName, response.managerEmail, response.engineerId, response.github);
+      teamMember.push(engineer);
+      addingNewMember();
+    })
+  }
+
+  function getIntern (){
+    inquirer.prompt([
+      {
+        type: "input",
+        name: "internName",
+        message: "what is your intern's name? "
+      },
+      {
+        type: "input",
+        name: "internId",
+        message: "what is your intern's Id? "
+      },
+      {
+        type: "input",
+        name: "school",
+        message: "what is your intern's School? "
+      },
+      {
+        type: "input",
+        name: "internEmail",
+        message: "what is your intern's Email? "
+      },
+
+    ]).then(response => {
+      const intern = new Intern(response.internName, response.internId, response.internEmail, response.school);
+      teamMember.push(intern);
+      addingNewMember();
+    })
+
+  }
+
+  function addingNewMember() {
+    inquirer.prompt([
+
+      {
+        type: "list",
+        name: "selectemployees",
+        message: "which employee would you like to choose?",
+        choices: [
+          "engineer",
+          "intern",
+          "manager",
+          "done"
+        ]
+      }
+
+    ]).then(response => {
+      const role = response.selectemployees;
+      if (role == "manager") {
+        getManager();
+
+      } else if (role == "engineer") {
+        getEngineer();
+
+      } else if (role == "intern") {
+        getIntern();
+
+      } else if (role == "done") {
+        renderTeam();
+      }
+    });
+  }
+  addingNewMember()
+}
+
+function renderTeam () {
+  fs.writeFileSync(('writeHTML', 'team.html'), generatePage(teamMember));
+};
+getInfo();
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const OUTPUT_DIR = path.resolve(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
+
+// const render = require("./lib/htmlRender");
+
+//const team = []
 
 
 
@@ -171,138 +325,3 @@ const team = []
   
 // }
 // getInfo ()
-
-
-
-
-const teamMember = [];
-function getInfo() {
-  function getManager() {
-    inquirer.prompt([
-      {
-        type: "input",
-        name: "managerName",
-        message: "What is your Manager's name?"
-      },
-      {
-        type: "input",
-        name: "managerId",
-        message: "What is your Manager's Id?"
-      },
-      {
-        type: "input",
-        name: "managerEmail",
-        message: "What is your Manager's Email?"
-      },
-      {
-        type: "input",
-        name: "officeNumber",
-        message: "What is your Manager's office Number?"
-      }
-
-    ]).then(response => {
-      const manager = new Manager(response.managerName, response.managerId, response.managerEmail, response.officeNumber);
-      teamMember.push(manager);
-      addingNewMember();
-    })
-  }
-  function getEngineer() {
-    inquirer.prompt([
-        {
-          type: "input",
-          name: "engineerName",
-          message: "what is your engineer name? "
-        },
-        
-        {
-          type: "input",
-          name: "engineerId",
-          message: "what is your engineer Id? "
-        },
-        {
-          type: "input",
-          name: "engineerEmail",
-          message: "what is your engineer Email? "
-        },
-        {
-          type: "input",
-          name: "github",
-          message: "what is your engineer Github Username? "
-        },
-
-    ]).then(response => {
-      const engineer = new Engineer(response.engineerName, response.managerEmail, response.engineerId, response.github);
-      teamMember.push(engineer);
-      addingNewMember();
-    })
-  }
-
-  function getIntern (){
-    inquirer.prompt([
-      {
-        type: "input",
-        name: "internName",
-        message: "what is your intern's name? "
-      },
-      {
-        type: "input",
-        name: "internId",
-        message: "what is your intern's Id? "
-      },
-      {
-        type: "input",
-        name: "school",
-        message: "what is your intern's School? "
-      },
-      {
-        type: "input",
-        name: "internEmail",
-        message: "what is your intern's Email? "
-      },
-
-    ]).then(response => {
-      const intern = new Intern(response.internName, response.internId, response.internEmail, response.school);
-      teamMember.push(intern);
-      addingNewMember();
-    })
-
-  }
-
-  function addingNewMember() {
-    inquirer.prompt([
-
-      {
-        type: "checkbox",
-        name: "selectemployees",
-        message: "which employee would you like to choose?",
-        choices: [
-          "engineer",
-          "intern",
-          "manager",
-          "employee"
-        ]
-      }
-
-    ]).then(response => {
-      const role = response.selectemployees;
-      if (role == "manager") {
-        getManager();
-
-      } else if (role == "engineer") {
-        getEngineer();
-
-      }else if (role == "intern") {
-        getIntern();
-
-      }else if (role == "employee") {
-        getEmployee();
-      }
-    });
-  }
-  addingNewMember()
-}
-
-// function renderTeam () {
-//   fs.writeFileSync("./dist/team.html", html, (teamMember));
-// }
-getInfo();
