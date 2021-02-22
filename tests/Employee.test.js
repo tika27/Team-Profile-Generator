@@ -36,7 +36,7 @@ const Employee = require("../lib/Employee");
     expect(e.getId()).toBe(testValue);
   });
 
-  test("Can return Email when called()", () => {
+  test("Can return Email when called", () => {
     const testValue = "test@test.com";
     const e = new Employee("Lola", 2, testValue);
     expect(e.getEmail()).toBe(testValue);

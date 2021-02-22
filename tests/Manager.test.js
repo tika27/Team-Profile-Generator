@@ -24,4 +24,3 @@ test("can set office number via getOffice", () =>{
 
 });
 
-// module.exports = Employee; 
