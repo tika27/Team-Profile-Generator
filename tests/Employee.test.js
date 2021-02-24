@@ -14,14 +14,14 @@ const Employee = require("../lib/Employee");
 
   test("Can return name when getName is called", () => {
     const testValue = 100;
-    const e = new Employee("Lola", testValue);
+    const e = new Employee("Lola", "test@test.com", testValue);
     expect(e.id).toBe(testValue);
   });
 
   test("Can return email when getEmail is called", () => {
     const testValue = "test@test.com";
-    const e = new Employee("Lola", 2, testValue);
-    expect(e.getEmail).toBe(testValue);
+    const e = new Employee("Lola", testValue, 2);
+    expect(e.getEmail()).toBe(testValue);
   });
 
   test("Can return email when Email is called()", () => {
@@ -32,13 +32,13 @@ const Employee = require("../lib/Employee");
 
   test("Can return id when called()", () => {
     const testValue = "100";
-    const e = new Employee("Lola", testValue);
+    const e = new Employee("Lola", "test@test.com", testValue);
     expect(e.getId()).toBe(testValue);
   });
 
   test("Can return Email when called", () => {
     const testValue = "test@test.com";
-    const e = new Employee("Lola", 2, testValue);
+    const e = new Employee("Lola", testValue, 2);
     expect(e.getEmail()).toBe(testValue);
   });
   

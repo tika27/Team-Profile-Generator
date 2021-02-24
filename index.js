@@ -162,7 +162,15 @@ function getInfo() {
 }
 
 function renderTeam () {
-  fs.writeFileSync(('writeHTML', 'team.html'), generatePage(teamMember));
+   var template =generatePage(teamMember);
+
+  fs.writeFile('./dist/team.html', template, function (err) {
+    if (err) {
+        return console.log(err);
+    }
+
+    console.log('Success!');
+});
 };
 getInfo();
 
@@ -177,151 +185,3 @@ getInfo();
 
 
 
-
-// const OUTPUT_DIR = path.resolve(__dirname, "output");
-// const outputPath = path.join(OUTPUT_DIR, "team.html");
-
-// const render = require("./lib/htmlRender");
-
-//const team = []
-
-
-
-// function getInfo() {
-//   inquirer.prompt([
-//     {
-//       type: "list",
-//       name: "role",
-//       message: "Please choose the employee Role:",
-//       choices: ["Manager", "Employee", "Engineer", "Intern"]
-//     },
-    
-//   {
-//     type: "input",
-//     name: "name",
-//     message: "Please enter your employee Name?",
-//     validate: nameInput => {
-//       if(nameInput) {
-//         return true;
-
-//       } else {
-//         console.log("Please enter team member name!")
-//         return false;
-//       }
-//     }
-
-//   },
-  
-//   {
-//     type: "input",
-//     name: "email",
-//     message: "what is your employee email address?",
-//     validate: emailInput => {
-//       if(emailInput) {
-//         return true;
-
-//       } else {
-//         console.log("Please enter team member email!")
-//         return false;
-//       }
-//     }
-
-//   },
-//   {
-//     type: "input",
-//     name: "id",
-//     message: "Please enter employee Id",
-//     validate: IdInput => {
-//       if(IdInput) {
-//         return true;
-
-//       } else {
-//         console.log("Please enter a valid ID!")
-//         return false;
-//       }
-//     }
-
-//   }
-    
-  
-// ])
-// .then(employeeAnswers => {
-
-//   if (employeeAnswers.role === "Engineer"){
-
-//     getEngineer(employeeAnswers);
-
-//   }else if (answers.role === "Manager") {
-//     inquirer.prompt([{
-//       type: "input",
-//       name: "office",
-//       manager: "Please enter Manager office number",
-//       validate: officeInput => {
-//         if (officeInput) {
-//           return true;
-//         } else{
-//           console.log("Please enter manager office number!")
-//         }
-
-//       }
-   
-//     }])
-//     .then(answer => {
-//       console.log(answer.office)
-//       const someManager = new Manager(answers.name, answers.email, answer.id, answer.role, answer.github)
-
-
-//     })
-//   }
-
-// })
-// }
-
-
-// function getEngineer(employeeAnswers)
-// {
-//   console.log(employeeAnswers)
-//   inquirer.prompt([{
-//     type: "input",
-//     name: "github",
-//     message: "github",
-//     validate: nameInput => {
-//       if(nameInput) {
-//         return true;
-
-//       } else {
-//         console.log("Please enter github name!")
-//         return false;
-//       }
-//     }
-
-//   },
-//     {
-//       type: "input",
-//       name: "managerName",
-//       message: "What is your Manager's name?"
-//     },
-//      {
-//       type: "input",
-//       name: "managerId",
-//       message: "What is your Manager's Id?"
-//       },
-//       {
-//       type: "input",
-//       name: "managerEmail",
-//       message: "What is your Manager's Email?"
-//       },
-//      {
-//       type: "input",
-//       name: "officeNumber",
-//       message: "What is your Manager's office Number?"
-//       }
-// ])
-// .then(engineerAnswer=>{
-//   console.log(engineerAnswer)
-   
-
-// })
-  
-// }
-// getInfo ()
