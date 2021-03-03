@@ -58,11 +58,15 @@ function getInfo() {
         name: "officeNumber",
         message: "What is your Manager's office Number?"
       }
+      //are you done?
 
     ]).then(response => {
       const manager = new Manager(response.managerName, response.managerId, response.managerEmail, response.officeNumber);
       teamMember.push(manager);
+      //if not done call
       addingNewMember();
+      //else  passing yourdata (teamMember) and call the html tempalte thing
+      
     })
   }
   function getEngineer() {
@@ -138,7 +142,7 @@ function getInfo() {
           "engineer",
           "intern",
           "manager",
-          "done"
+          //"done"
         ]
       }
 
@@ -153,9 +157,10 @@ function getInfo() {
       } else if (role == "intern") {
         getIntern();
 
-      } else if (role == "done") {
-        renderTeam();
-      }
+      } 
+      // else if (role == "done") {
+      //   renderTeam();
+      // }
     });
   }
   addingNewMember()
